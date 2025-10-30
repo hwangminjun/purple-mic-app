@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Voice = () => {
   const navigate = useNavigate();
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-background to-primary/5 py-8">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-background to-primary/5 py-8 -mt-12">
       <div className="flex flex-col items-center space-y-8">
         <div className="text-center space-y-4">
           <div className="relative w-48 h-48 mx-auto flex items-center justify-center">
