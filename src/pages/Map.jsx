@@ -23,7 +23,7 @@ const Map = () => {
     "강원특별자치도"
   ];
 
-  const districts: { [key: string]: string[] } = {
+  const districts = {
     "서울특별시": ["전체", "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구"],
     "부산광역시": ["전체", "해운대구", "수영구", "남구", "동래구", "부산진구"],
     "대구광역시": ["전체", "중구", "동구", "서구", "남구", "북구"],
@@ -65,7 +65,7 @@ const Map = () => {
     }
   ];
 
-  const getStatusBadge = (status: string) => {
+  const getStatusBadge = (status) => {
     switch (status) {
       case "응급":
         return <Badge variant="destructive" className="text-xs">응급</Badge>;

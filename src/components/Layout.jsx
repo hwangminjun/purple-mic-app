@@ -1,13 +1,9 @@
-import { ReactNode, useEffect } from "react";
+import { useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { Home, Search, Mic } from "lucide-react";
 import logo from "@/assets/logo.png";
 
-interface LayoutProps {
-  children: ReactNode;
-}
-
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({ children }) => {
   const location = useLocation();
 
   useEffect(() => {
