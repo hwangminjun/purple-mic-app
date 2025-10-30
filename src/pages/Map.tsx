@@ -1,9 +1,46 @@
 import { useState } from "react";
-import { ChevronRight, MapPin, Flame, Info } from "lucide-react";
+import { ChevronRight, MapPin, Flame, Info, Search, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const Map = () => {
   const [selectedRegion, setSelectedRegion] = useState("서울특별시 강남구");
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [selectedCity, setSelectedCity] = useState("서울특별시");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const cities = [
+    "서울특별시",
+    "부산광역시",
+    "대구광역시",
+    "인천광역시",
+    "광주광역시",
+    "대전광역시",
+    "울산광역시",
+    "세종특별자치시",
+    "경기도",
+    "강원특별자치도"
+  ];
+
+  const districts: { [key: string]: string[] } = {
+    "서울특별시": ["전체", "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구"],
+    "부산광역시": ["전체", "해운대구", "수영구", "남구", "동래구", "부산진구"],
+    "대구광역시": ["전체", "중구", "동구", "서구", "남구", "북구"],
+    "인천광역시": ["전체", "중구", "동구", "미추홀구", "연수구", "남동구"],
+    "광주광역시": ["전체", "동구", "서구", "남구", "북구", "광산구"],
+    "대전광역시": ["전체", "동구", "중구", "서구", "유성구", "대덕구"],
+    "울산광역시": ["전체", "중구", "남구", "동구", "북구", "울주군"],
+    "세종특별자치시": ["전체"],
+    "경기도": ["전체", "수원시", "성남시", "고양시", "용인시", "부천시"],
+    "강원특별자치도": ["전체", "춘천시", "원주시", "강릉시", "동해시", "태백시"]
+  };
+
+  const handleConfirm = () => {
+    setIsDialogOpen(false);
+  };
 
   const hospitalData = [
     {
@@ -47,10 +84,94 @@ const Map = () => {
     <div className="w-full h-full overflow-y-auto bg-background">
       <div className="w-full p-4 space-y-4">
         {/* Region Selector */}
-        <div className="flex items-center justify-between p-3 border rounded-md bg-background cursor-pointer hover:bg-accent">
+        <div 
+          onClick={() => setIsDialogOpen(true)}
+          className="flex items-center justify-between p-3 border rounded-md bg-background cursor-pointer hover:bg-accent"
+        >
           <span className="text-sm">{selectedRegion}</span>
           <ChevronRight className="w-4 h-4 text-muted-foreground" />
         </div>
+
+        {/* Region Selection Dialog */}
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+          <DialogContent className="max-w-md p-0">
+            <DialogHeader className="p-4 pb-2">
+              <div className="flex items-center justify-between">
+                <DialogTitle>지역</DialogTitle>
+                <button
+                  onClick={() => setIsDialogOpen(false)}
+                  className="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+            </DialogHeader>
+            
+            <div className="px-4 pb-2">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="지역명을 입력하세요"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-9"
+                />
+              </div>
+            </div>
+
+            <div className="flex h-[400px]">
+              {/* Cities List */}
+              <ScrollArea className="w-[40%] border-r">
+                <div className="p-2">
+                  {cities.map((city) => (
+                    <div
+                      key={city}
+                      onClick={() => setSelectedCity(city)}
+                      className={`px-4 py-3 cursor-pointer text-sm rounded-md transition-colors ${
+                        selectedCity === city
+                          ? "text-primary font-medium"
+                          : "hover:bg-accent"
+                      }`}
+                    >
+                      {city}
+                      {selectedCity === city && (
+                        <ChevronRight className="inline-block w-4 h-4 ml-1" />
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </ScrollArea>
+
+              {/* Districts List */}
+              <ScrollArea className="flex-1">
+                <div className="p-2">
+                  {districts[selectedCity]?.map((district) => (
+                    <div
+                      key={district}
+                      onClick={() => setSelectedRegion(`${selectedCity} ${district}`)}
+                      className={`px-4 py-3 cursor-pointer text-sm rounded-md transition-colors ${
+                        selectedRegion === `${selectedCity} ${district}`
+                          ? "bg-accent/50"
+                          : "hover:bg-accent"
+                      }`}
+                    >
+                      {district}
+                    </div>
+                  ))}
+                </div>
+              </ScrollArea>
+            </div>
+
+            <div className="p-4 pt-2">
+              <Button
+                onClick={handleConfirm}
+                className="w-full bg-primary hover:bg-primary/90"
+              >
+                조회하기
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
 
         {/* Results Section */}
         <div className="space-y-3">
