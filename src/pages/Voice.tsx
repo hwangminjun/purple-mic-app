@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 const Voice = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-between bg-gradient-to-b from-background to-primary/5 py-8">
-      <div className="flex-1 flex items-center justify-center">
-        <div className="text-center space-y-8">
+      <div className="flex-1 flex items-center justify-center pt-16">
+        <div className="text-center space-y-8 -mt-24">
           <div className="relative w-64 h-64 mx-auto">
             {/* Animated circles */}
             <div className="absolute inset-0 flex items-center justify-center">
