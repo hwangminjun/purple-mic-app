@@ -8,7 +8,7 @@ const Voice = () => {
           <div className="relative w-64 h-64 mx-auto">
             {/* Animated circles */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-32 h-32 rounded-full bg-primary/20 animate-pulse" />
+              <div className="w-28 h-28 rounded-full bg-primary/20 animate-pulse" />
             </div>
             <div className="absolute inset-0 flex items-center justify-center animate-ping">
               <div className="w-48 h-48 rounded-full bg-primary/10" />
