@@ -84,15 +84,11 @@ const Map = () => {
               {/* Hospital List */}
               <div className="space-y-3">
                 {hospitalData.map((hospital, index) => (
-                  <div key={index} className="space-y-2 pb-3 border-b last:border-b-0">
-                    {/* Hospital Name Row */}
-                    <div className="flex items-center justify-center">
-                      <span className="text-sm font-medium">{hospital.name}</span>
-                    </div>
-
+                  <div key={index} className="pb-3 border-b last:border-b-0">
                     {/* Hospital Info Row */}
                     <div className="grid grid-cols-5 gap-2 items-center">
-                      <div className="flex items-center justify-center text-xs">
+                      <div className="flex items-center justify-center text-sm font-medium">
+                        {hospital.name}
                       </div>
 
                       <div className="flex flex-col items-center justify-center gap-1">
