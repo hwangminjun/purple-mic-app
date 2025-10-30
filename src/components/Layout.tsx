@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { NavLink } from "react-router-dom";
-import { Home, Map, Mic, FileText, User } from "lucide-react";
+import { Home, Map, Mic, FileText, LayoutDashboard } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 interface LayoutProps {
@@ -13,7 +13,7 @@ const Layout = ({ children }: LayoutProps) => {
     { to: "/map", icon: Map, label: "지도" },
     { to: "/voice", icon: Mic, label: "음성", isCenter: true },
     { to: "/log", icon: FileText, label: "로그" },
-    { to: "/profile", icon: User, label: "프로필" },
+    { to: "/dashboard", icon: LayoutDashboard, label: "대시보드" },
   ];
 
   return (
