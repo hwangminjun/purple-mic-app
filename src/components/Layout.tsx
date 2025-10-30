@@ -36,12 +36,12 @@ const Layout = ({ children }: LayoutProps) => {
 
       {/* Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 h-20 bg-[hsl(var(--nav-background))] border-t border-[hsl(var(--nav-border))] z-40">
-        <div className="flex items-center justify-center h-full px-4 relative">
+        <div className="flex items-center h-full relative">
           {/* Voice button - floating above */}
           <NavLink
             to={voiceItem.to}
             className={({ isActive }) =>
-              `absolute left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center w-16 h-16 rounded-full transition-all ${
+              `absolute left-1/2 -translate-x-1/2 -top-12 flex flex-col items-center justify-center w-16 h-16 rounded-full transition-all ${
                 isActive
                   ? "bg-primary text-primary-foreground shadow-lg shadow-primary/50"
                   : "bg-primary text-primary-foreground shadow-md"
@@ -51,26 +51,24 @@ const Layout = ({ children }: LayoutProps) => {
             <voiceItem.icon className="w-7 h-7" />
           </NavLink>
 
-          {/* Other nav items - centered */}
-          <div className="flex items-center justify-center gap-12">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              return (
-                <NavLink
-                  key={item.to}
-                  to={item.to}
-                  className={({ isActive }) =>
-                    `flex flex-col items-center justify-center gap-1 py-2 transition-colors ${
-                      isActive ? "text-[hsl(var(--nav-item-active))]" : "text-[hsl(var(--nav-item))]"
-                    }`
-                  }
-                >
-                  <Icon className="w-6 h-6" />
-                  <span className="text-xs font-medium">{item.label}</span>
-                </NavLink>
-              );
-            })}
-          </div>
+          {/* Other nav items - equal spacing */}
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                className={({ isActive }) =>
+                  `flex-1 flex flex-col items-center justify-center gap-1 py-2 transition-colors ${
+                    isActive ? "text-[hsl(var(--nav-item-active))]" : "text-[hsl(var(--nav-item))]"
+                  }`
+                }
+              >
+                <Icon className="w-6 h-6" />
+                <span className="text-xs font-medium">{item.label}</span>
+              </NavLink>
+            );
+          })}
         </div>
       </nav>
     </div>
