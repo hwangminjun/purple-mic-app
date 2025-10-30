@@ -1,62 +1,141 @@
 import { useState } from "react";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { ChevronRight, MapPin, Flame, Info } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
 
 const Map = () => {
-  const [selectedCity, setSelectedCity] = useState("");
-  const [selectedRadius, setSelectedRadius] = useState("");
+  const [selectedRegion, setSelectedRegion] = useState("서울특별시 강남구");
 
-  const cities = [
-    "서울특별시", "부산광역시", "대구광역시", "인천광역시", 
-    "광주광역시", "대전광역시", "울산광역시", "세종특별자치시",
-    "경기도", "강원도", "충청북도", "충청남도",
-    "전라북도", "전라남도", "경상북도", "경상남도", "제주특별자치도"
+  const hospitalData = [
+    {
+      name: "강남세브",
+      location: "강남구",
+      isHot: true,
+      stats: {
+        중급실입원: { current: 2, total: 21, status: "응급" },
+        중급실소아: { current: 2, total: 2, status: "normal" },
+        분만실: { value: "가능/1", status: "available" },
+        응급거래: { current: 1, total: 1, status: "normal" }
+      }
+    },
+    {
+      name: "삼성서울",
+      location: "강남구",
+      isHot: true,
+      stats: {
+        중급실입원: { current: -10, total: 52, status: "응급" },
+        중급실소아: { current: 2, total: 4, status: "warning" },
+        분만실: { value: "가능/8", status: "available" },
+        응급거래: { current: 0, total: 2, status: "응급" }
+      }
+    }
   ];
 
-  const radiusOptions = [
-    { value: "500", label: "500m" },
-    { value: "1000", label: "1km" },
-    { value: "3000", label: "3km" },
-    { value: "5000", label: "5km" },
-    { value: "10000", label: "10km" }
-  ];
+  const getStatusBadge = (status: string) => {
+    switch (status) {
+      case "응급":
+        return <Badge variant="destructive" className="text-xs">응급</Badge>;
+      case "warning":
+        return <Badge className="bg-orange-500 text-white text-xs">보통</Badge>;
+      case "available":
+        return <Badge className="bg-green-500 text-white text-xs">가능</Badge>;
+      default:
+        return null;
+    }
+  };
 
   return (
-    <div className="w-full h-full overflow-y-auto bg-background p-6">
-      <div className="max-w-2xl mx-auto space-y-8">
-        {/* 시/도 선택 */}
-        <div className="space-y-4">
-          <h2 className="text-lg font-semibold text-foreground">시/도 선택</h2>
-          <RadioGroup value={selectedCity} onValueChange={setSelectedCity}>
-            <div className="grid grid-cols-2 gap-3">
-              {cities.map((city) => (
-                <div key={city} className="flex items-center space-x-2">
-                  <RadioGroupItem value={city} id={city} />
-                  <Label htmlFor={city} className="cursor-pointer text-foreground">
-                    {city}
-                  </Label>
-                </div>
-              ))}
-            </div>
-          </RadioGroup>
-        </div>
+    <div className="w-full h-full overflow-y-auto bg-background">
+      <div className="w-full">
+        {/* Tabs */}
+        <Tabs defaultValue="region" className="w-full">
+          <TabsList className="w-full grid grid-cols-2 rounded-none h-12">
+            <TabsTrigger value="region" className="relative">
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 w-2 h-2 bg-destructive rounded-full" />
+              시/도 선택
+            </TabsTrigger>
+            <TabsTrigger value="radius">반경조건 설정</TabsTrigger>
+          </TabsList>
 
-        {/* 반경조건 설정 */}
-        <div className="space-y-4">
-          <h2 className="text-lg font-semibold text-foreground">반경조건 설정</h2>
-          <RadioGroup value={selectedRadius} onValueChange={setSelectedRadius}>
-            <div className="flex flex-col space-y-3">
-              {radiusOptions.map((option) => (
-                <div key={option.value} className="flex items-center space-x-2">
-                  <RadioGroupItem value={option.value} id={option.value} />
-                  <Label htmlFor={option.value} className="cursor-pointer text-foreground">
-                    {option.label}
-                  </Label>
-                </div>
-              ))}
+          <TabsContent value="region" className="mt-0 p-4 space-y-4">
+            {/* Region Selector */}
+            <div className="flex items-center justify-between p-3 border rounded-md bg-background cursor-pointer hover:bg-accent">
+              <span className="text-sm">{selectedRegion}</span>
+              <ChevronRight className="w-4 h-4 text-muted-foreground" />
             </div>
-          </RadioGroup>
-        </div>
+
+            {/* Results Section */}
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <h3 className="text-sm font-medium">
+                  중급실 가능 병상 조회 <span className="text-destructive">(2건)</span>
+                </h3>
+                <Info className="w-4 h-4 text-muted-foreground" />
+              </div>
+
+              {/* Table Header */}
+              <div className="grid grid-cols-5 gap-2 text-xs text-muted-foreground pb-2 border-b">
+                <div>기관 명</div>
+                <div className="text-center">중급실입원</div>
+                <div className="text-center">중급실소아</div>
+                <div className="text-center">분만실</div>
+                <div className="text-center">응급거래</div>
+              </div>
+
+              {/* Hospital List */}
+              <div className="space-y-3">
+                {hospitalData.map((hospital, index) => (
+                  <div key={index} className="space-y-2 pb-3 border-b last:border-b-0">
+                    {/* Hospital Name Row */}
+                    <div className="flex items-center gap-2">
+                      <MapPin className="w-4 h-4 text-destructive" />
+                      <span className="text-sm font-medium">{hospital.name}</span>
+                      {hospital.isHot && <Flame className="w-4 h-4 text-destructive" />}
+                    </div>
+
+                    {/* Hospital Info Row */}
+                    <div className="grid grid-cols-5 gap-2 items-center">
+                      <div className="flex items-center gap-1 text-xs">
+                        <MapPin className="w-3 h-3 text-destructive" />
+                        <span>{hospital.location}</span>
+                      </div>
+
+                      <div className="flex flex-col items-center gap-1">
+                        {getStatusBadge(hospital.stats.중급실입원.status)}
+                        <span className="text-xs">
+                          {hospital.stats.중급실입원.current}/{hospital.stats.중급실입원.total}
+                        </span>
+                      </div>
+
+                      <div className="flex flex-col items-center gap-1">
+                        {getStatusBadge(hospital.stats.중급실소아.status)}
+                        <span className="text-xs">
+                          {hospital.stats.중급실소아.current}/{hospital.stats.중급실소아.total}
+                        </span>
+                      </div>
+
+                      <div className="flex flex-col items-center gap-1">
+                        {getStatusBadge(hospital.stats.분만실.status)}
+                        <span className="text-xs">{hospital.stats.분만실.value}</span>
+                      </div>
+
+                      <div className="flex flex-col items-center gap-1">
+                        {getStatusBadge(hospital.stats.응급거래.status)}
+                        <span className="text-xs">
+                          {hospital.stats.응급거래.current}/{hospital.stats.응급거래.total}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="radius" className="mt-0 p-4">
+            {/* Radius content will be implemented later */}
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
