@@ -29,7 +29,7 @@ const Voice = () => {
           </div>
         </div>
 
-        <div className="w-full max-w-md px-4 flex gap-4">
+        <div className="w-full max-w-lg px-4 flex gap-4">
           <Button 
             variant="outline" 
             size="lg" 
