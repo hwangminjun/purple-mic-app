@@ -74,7 +74,7 @@ const Map = () => {
 
               {/* Table Header */}
               <div className="grid grid-cols-5 gap-2 text-xs text-muted-foreground pb-2 border-b">
-                <div>기관명</div>
+                <div className="text-center">기관명</div>
                 <div className="text-center">중급실입원</div>
                 <div className="text-center">중급실소아</div>
                 <div className="text-center">분만실</div>
@@ -86,16 +86,16 @@ const Map = () => {
                 {hospitalData.map((hospital, index) => (
                   <div key={index} className="space-y-2 pb-3 border-b last:border-b-0">
                     {/* Hospital Name Row */}
-                    <div className="flex items-center">
+                    <div className="flex items-center justify-center">
                       <span className="text-sm font-medium">{hospital.name}</span>
                     </div>
 
                     {/* Hospital Info Row */}
                     <div className="grid grid-cols-5 gap-2 items-center">
-                      <div className="text-xs">
+                      <div className="flex items-center justify-center text-xs">
                       </div>
 
-                      <div className="flex flex-col items-center gap-1">
+                      <div className="flex flex-col items-center justify-center gap-1">
                         {getStatusBadge(hospital.stats.중급실입원.status)}
                         <span className="text-xs">
                           {hospital.stats.중급실입원.current}/{hospital.stats.중급실입원.total}
