@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Map from "./pages/Map";
 import Log from "./pages/Log";
 import Voice from "./pages/Voice";
+import VoiceResult from "./pages/VoiceResult";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 
@@ -25,6 +26,7 @@ const App = () => (
             <Route path="/map" element={<Map />} />
             <Route path="/log" element={<Log />} />
             <Route path="/voice" element={<Voice />} />
+            <Route path="/voice-result" element={<VoiceResult />} />
             <Route path="/dashboard" element={<Dashboard />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

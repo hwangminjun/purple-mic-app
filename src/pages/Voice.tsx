@@ -38,7 +38,11 @@ const Voice = () => {
           >
             취소
           </Button>
-          <Button size="lg" className="flex-1 py-6 text-base">
+          <Button 
+            size="lg" 
+            className="flex-1 py-6 text-base"
+            onClick={() => navigate('/voice-result')}
+          >
             완료
           </Button>
         </div>
