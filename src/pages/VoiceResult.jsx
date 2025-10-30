@@ -24,8 +24,8 @@ const VoiceResult = () => {
       <div className="space-y-2">
         <h1 className="text-2xl font-bold text-foreground">AI 브리핑 결과</h1>
         <p className="text-sm text-muted-foreground">
-          "60대 남성, 교통사고로 머리 외상과 의식 저하 상태입니다.
-          혈압 85에 맥박 120으로 쇼크 의심됩니다.
+          "60대 남성, 교통사고로 머리 외상과 의식 저하 상태입니다.<br />
+          혈압 85에 맥박 120으로 쇼크 의심됩니다.<br />
           현재 기도 확보 완료, 산소 공급 중이며 중증 외상 가능성 높아 신속한 수용 요청드립니다."
         </p>
       </div>
