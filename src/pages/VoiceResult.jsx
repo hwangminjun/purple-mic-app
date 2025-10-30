@@ -5,17 +5,17 @@ const VoiceResult = () => {
     {
       name: "가톨릭대학교 서울성모병원",
       phone: "1588-1511",
-      recommendation: "추천 질환: 신장질환, 뇌혈관질환"
+      recommendation: "추천 판단 근거: 신장질환, 뇌혈관질환"
     },
     {
       name: "강남세브란스병원",
       phone: "02-2019-3114",
-      recommendation: "추천 질환: 심장질환, 암치료"
+      recommendation: "추천 판단 근거: 심장질환, 암치료"
     },
     {
       name: "삼성서울병원",
       phone: "02-3410-2114",
-      recommendation: "추천 질환: 종합검진, 암치료"
+      recommendation: "추천 판단 근거: 종합검진, 암치료"
     }
   ];
 
