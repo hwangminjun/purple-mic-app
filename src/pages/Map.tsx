@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { ChevronRight, MapPin, Flame, Info, Search, X } from "lucide-react";
+import { ChevronRight, MapPin, Flame, Info, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -10,7 +9,6 @@ const Map = () => {
   const [selectedRegion, setSelectedRegion] = useState("서울특별시 강남구");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedCity, setSelectedCity] = useState("서울특별시");
-  const [searchQuery, setSearchQuery] = useState("");
 
   const cities = [
     "서울특별시",
@@ -106,18 +104,6 @@ const Map = () => {
                 </button>
               </div>
             </DialogHeader>
-            
-            <div className="px-4 pb-2">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input
-                  placeholder="지역명을 입력하세요"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-9"
-                />
-              </div>
-            </div>
 
             <div className="flex h-[400px]">
               {/* Cities List */}
