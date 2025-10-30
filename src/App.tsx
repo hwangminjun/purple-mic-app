@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Map from "./pages/Map";
-import Log from "./pages/Log";
 import Voice from "./pages/Voice";
 import VoiceResult from "./pages/VoiceResult";
 import Dashboard from "./pages/Dashboard";
@@ -24,7 +23,6 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/map" element={<Map />} />
-            <Route path="/log" element={<Log />} />
             <Route path="/voice" element={<Voice />} />
             <Route path="/voice-result" element={<VoiceResult />} />
             <Route path="/dashboard" element={<Dashboard />} />
