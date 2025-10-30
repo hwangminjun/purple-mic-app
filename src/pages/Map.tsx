@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ChevronRight, MapPin, Flame, Info } from "lucide-react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 
 const Map = () => {
@@ -46,87 +45,71 @@ const Map = () => {
 
   return (
     <div className="w-full h-full overflow-y-auto bg-background">
-      <div className="w-full">
-        {/* Tabs */}
-        <Tabs defaultValue="region" className="w-full">
-          <TabsList className="w-full grid grid-cols-2 rounded-none h-12">
-            <TabsTrigger value="region">
-              시/도 선택
-            </TabsTrigger>
-            <TabsTrigger value="radius">반경조건 설정</TabsTrigger>
-          </TabsList>
+      <div className="w-full p-4 space-y-4">
+        {/* Region Selector */}
+        <div className="flex items-center justify-between p-3 border rounded-md bg-background cursor-pointer hover:bg-accent">
+          <span className="text-sm">{selectedRegion}</span>
+          <ChevronRight className="w-4 h-4 text-muted-foreground" />
+        </div>
 
-          <TabsContent value="region" className="mt-0 p-4 space-y-4">
-            {/* Region Selector */}
-            <div className="flex items-center justify-between p-3 border rounded-md bg-background cursor-pointer hover:bg-accent">
-              <span className="text-sm">{selectedRegion}</span>
-              <ChevronRight className="w-4 h-4 text-muted-foreground" />
-            </div>
+        {/* Results Section */}
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-medium">
+              중급실 가능 병상 조회 <span className="text-destructive">(2건)</span>
+            </h3>
+            <Info className="w-4 h-4 text-muted-foreground" />
+          </div>
 
-            {/* Results Section */}
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <h3 className="text-sm font-medium">
-                  중급실 가능 병상 조회 <span className="text-destructive">(2건)</span>
-                </h3>
-                <Info className="w-4 h-4 text-muted-foreground" />
-              </div>
+          {/* Table Header */}
+          <div className="grid grid-cols-5 gap-2 text-xs text-muted-foreground pb-2 border-b">
+            <div className="text-center">기관명</div>
+            <div className="text-center">중급실입원</div>
+            <div className="text-center">중급실소아</div>
+            <div className="text-center">분만실</div>
+            <div className="text-center">응급거래</div>
+          </div>
 
-              {/* Table Header */}
-              <div className="grid grid-cols-5 gap-2 text-xs text-muted-foreground pb-2 border-b">
-                <div className="text-center">기관명</div>
-                <div className="text-center">중급실입원</div>
-                <div className="text-center">중급실소아</div>
-                <div className="text-center">분만실</div>
-                <div className="text-center">응급거래</div>
-              </div>
-
-              {/* Hospital List */}
-              <div className="space-y-3">
-                {hospitalData.map((hospital, index) => (
-                  <div key={index} className="pb-3 border-b last:border-b-0">
-                    {/* Hospital Info Row */}
-                    <div className="grid grid-cols-5 gap-2 items-center">
-                      <div className="flex items-center justify-center text-sm font-medium">
-                        {hospital.name}
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center gap-1">
-                        {getStatusBadge(hospital.stats.중급실입원.status)}
-                        <span className="text-xs">
-                          {hospital.stats.중급실입원.current}/{hospital.stats.중급실입원.total}
-                        </span>
-                      </div>
-
-                      <div className="flex flex-col items-center gap-1">
-                        {getStatusBadge(hospital.stats.중급실소아.status)}
-                        <span className="text-xs">
-                          {hospital.stats.중급실소아.current}/{hospital.stats.중급실소아.total}
-                        </span>
-                      </div>
-
-                      <div className="flex flex-col items-center gap-1">
-                        {getStatusBadge(hospital.stats.분만실.status)}
-                        <span className="text-xs">{hospital.stats.분만실.value}</span>
-                      </div>
-
-                      <div className="flex flex-col items-center gap-1">
-                        {getStatusBadge(hospital.stats.응급거래.status)}
-                        <span className="text-xs">
-                          {hospital.stats.응급거래.current}/{hospital.stats.응급거래.total}
-                        </span>
-                      </div>
-                    </div>
+          {/* Hospital List */}
+          <div className="space-y-3">
+            {hospitalData.map((hospital, index) => (
+              <div key={index} className="pb-3 border-b last:border-b-0">
+                {/* Hospital Info Row */}
+                <div className="grid grid-cols-5 gap-2 items-center">
+                  <div className="flex items-center justify-center text-sm font-medium">
+                    {hospital.name}
                   </div>
-                ))}
-              </div>
-            </div>
-          </TabsContent>
 
-          <TabsContent value="radius" className="mt-0 p-4">
-            {/* Radius content will be implemented later */}
-          </TabsContent>
-        </Tabs>
+                  <div className="flex flex-col items-center justify-center gap-1">
+                    {getStatusBadge(hospital.stats.중급실입원.status)}
+                    <span className="text-xs">
+                      {hospital.stats.중급실입원.current}/{hospital.stats.중급실입원.total}
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col items-center gap-1">
+                    {getStatusBadge(hospital.stats.중급실소아.status)}
+                    <span className="text-xs">
+                      {hospital.stats.중급실소아.current}/{hospital.stats.중급실소아.total}
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col items-center gap-1">
+                    {getStatusBadge(hospital.stats.분만실.status)}
+                    <span className="text-xs">{hospital.stats.분만실.value}</span>
+                  </div>
+
+                  <div className="flex flex-col items-center gap-1">
+                    {getStatusBadge(hospital.stats.응급거래.status)}
+                    <span className="text-xs">
+                      {hospital.stats.응급거래.current}/{hospital.stats.응급거래.total}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
