@@ -57,13 +57,13 @@ const Layout = ({ children }: LayoutProps) => {
                 key={item.to}
                 to={item.to}
                 className={({ isActive }) =>
-                  `flex flex-col items-center justify-center gap-1 py-2 transition-colors ${
+                  `flex-1 flex flex-col items-center justify-center gap-1 py-2 transition-colors ${
                     isActive ? "text-[hsl(var(--nav-item-active))]" : "text-[hsl(var(--nav-item))]"
                   }`
                 }
               >
-                <Icon className="w-6 h-6 mx-auto" />
-                <span className="text-xs font-medium text-center">{item.label}</span>
+                <Icon className="w-6 h-6" />
+                <span className="text-xs font-medium">{item.label}</span>
               </NavLink>
             );
           })}
