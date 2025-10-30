@@ -10,7 +10,7 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   const navItems = [
     { to: "/", icon: Home, label: "홈" },
-    { to: "/map", icon: Map, label: "지도" },
+    { to: "/map", icon: Map, label: "간편검색" },
     { to: "/voice", icon: Mic, label: "음성", isCenter: true },
     { to: "/log", icon: FileText, label: "로그" },
     { to: "/dashboard", icon: LayoutDashboard, label: "대시보드" },
