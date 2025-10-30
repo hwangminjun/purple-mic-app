@@ -1,6 +1,6 @@
 import { ReactNode, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { Home, Search, Mic, FileText, LayoutDashboard } from "lucide-react";
+import { Home, Search, Mic } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 interface LayoutProps {
@@ -17,7 +17,6 @@ const Layout = ({ children }: LayoutProps) => {
   const navItems = [
     { to: "/", icon: Home, label: "홈" },
     { to: "/map", icon: Search, label: "간편검색" },
-    { to: "/dashboard", icon: LayoutDashboard, label: "대시보드" },
   ];
 
   const voiceItem = { to: "/voice", icon: Mic, label: "음성" };
