@@ -16,6 +16,8 @@ const VoiceResult = () => {
 
   return (
     <div className="min-h-screen bg-background p-4">
+      <h2 className="text-xl font-semibold mb-4">AI 브리핑 생성 결과</h2>
+      
       <Card className="mb-6">
         <CardContent className="pt-6">
           <p className="text-lg text-foreground">
@@ -25,9 +27,7 @@ const VoiceResult = () => {
       </Card>
 
       <div className="space-y-4">
-        <h3 className="text-sm font-medium">
-          검색 결과 <span className="text-destructive">({hospitalData.length}건)</span>
-        </h3>
+        <h3 className="text-sm font-medium">검색 결과</h3>
 
         <div className="space-y-3">
           {hospitalData.map((hospital, index) => (
