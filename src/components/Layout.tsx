@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { NavLink } from "react-router-dom";
+import { ReactNode, useEffect } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import { Home, Search, Mic, FileText, LayoutDashboard } from "lucide-react";
 import logo from "@/assets/logo.png";
 
@@ -8,6 +8,12 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   const navItems = [
     { to: "/", icon: Home, label: "홈" },
     { to: "/map", icon: Search, label: "간편검색" },
