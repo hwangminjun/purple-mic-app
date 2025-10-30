@@ -41,7 +41,7 @@ const Layout = ({ children }: LayoutProps) => {
           <NavLink
             to={voiceItem.to}
             className={({ isActive }) =>
-              `absolute left-1/2 -translate-x-1/2 -top-12 flex flex-col items-center justify-center w-16 h-16 rounded-full transition-all ${
+              `absolute left-1/2 -translate-x-1/2 -top-16 flex flex-col items-center justify-center w-16 h-16 rounded-full transition-all ${
                 isActive
                   ? "bg-primary text-primary-foreground shadow-lg shadow-primary/50"
                   : "bg-primary text-primary-foreground shadow-md"
