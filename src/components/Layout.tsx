@@ -40,7 +40,7 @@ const Layout = ({ children }: LayoutProps) => {
                   key={item.to}
                   to={item.to}
                   className={({ isActive }) =>
-                    `absolute left-1/2 -translate-x-1/2 -top-6 flex flex-col items-center justify-center w-16 h-16 rounded-full transition-all ${
+                    `absolute left-1/2 -translate-x-1/2 -top-10 flex flex-col items-center justify-center w-16 h-16 rounded-full transition-all ${
                       isActive
                         ? "bg-primary text-primary-foreground shadow-lg shadow-primary/50"
                         : "bg-primary text-primary-foreground shadow-md"
