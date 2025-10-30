@@ -1,72 +1,38 @@
-import { Mic, Square } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
-
 const Voice = () => {
-  const [isRecording, setIsRecording] = useState(false);
-
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-foreground mb-2">음성 녹음</h1>
-        <p className="text-muted-foreground">음성을 녹음하고 저장하세요</p>
-      </div>
-
-      <div className="max-w-md mx-auto">
-        <div className="bg-card rounded-2xl p-8 shadow-sm border border-border">
-          <div className="flex flex-col items-center justify-center gap-8">
-            <div className="relative">
-              <div className={`w-32 h-32 rounded-full flex items-center justify-center transition-all ${
-                isRecording 
-                  ? "bg-destructive animate-pulse" 
-                  : "bg-primary"
-              }`}>
-                {isRecording ? (
-                  <Square className="w-12 h-12 text-primary-foreground" />
-                ) : (
-                  <Mic className="w-12 h-12 text-primary-foreground" />
-                )}
-              </div>
-              {isRecording && (
-                <div className="absolute inset-0 rounded-full border-4 border-destructive animate-ping" />
-              )}
-            </div>
-
-            <div className="text-center">
-              <p className="text-lg font-medium mb-2">
-                {isRecording ? "녹음 중..." : "녹음 시작하기"}
-              </p>
-              <p className="text-sm text-muted-foreground">
-                {isRecording ? "버튼을 눌러 녹음을 중지하세요" : "버튼을 눌러 녹음을 시작하세요"}
-              </p>
-            </div>
-
-            <Button
-              size="lg"
-              className="w-full"
-              variant={isRecording ? "destructive" : "default"}
-              onClick={() => setIsRecording(!isRecording)}
-            >
-              {isRecording ? "녹음 중지" : "녹음 시작"}
-            </Button>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-primary/5">
+      <div className="text-center space-y-8">
+        <div className="relative w-64 h-64 mx-auto">
+          {/* Animated circles */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-32 h-32 rounded-full bg-primary/20 animate-pulse" />
+          </div>
+          <div className="absolute inset-0 flex items-center justify-center animate-ping">
+            <div className="w-48 h-48 rounded-full bg-primary/10" />
+          </div>
+          <div className="absolute inset-0 flex items-center justify-center" style={{ animation: 'ping 2s cubic-bezier(0, 0, 0.2, 1) infinite 0.5s' }}>
+            <div className="w-56 h-56 rounded-full bg-primary/5" />
+          </div>
+          
+          {/* Waveform bars */}
+          <div className="absolute inset-0 flex items-center justify-center gap-1">
+            {[...Array(5)].map((_, i) => (
+              <div
+                key={i}
+                className="w-1 bg-primary rounded-full"
+                style={{
+                  height: '40%',
+                  animation: `pulse 1s ease-in-out infinite ${i * 0.1}s`,
+                  opacity: 0.6 + (i * 0.1)
+                }}
+              />
+            ))}
           </div>
         </div>
 
-        <div className="mt-6 space-y-2">
-          <h3 className="font-semibold text-foreground mb-3">최근 녹음</h3>
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="bg-card rounded-xl p-4 shadow-sm border border-border flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <Mic className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <p className="font-medium text-sm">녹음 {i}</p>
-                  <p className="text-xs text-muted-foreground">2024-01-{15 - i}</p>
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="space-y-2">
+          <h2 className="text-2xl font-bold text-foreground">음성 인식 중...</h2>
+          <p className="text-muted-foreground">말씀하세요</p>
         </div>
       </div>
     </div>
