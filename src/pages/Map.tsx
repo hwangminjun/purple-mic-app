@@ -50,8 +50,7 @@ const Map = () => {
         {/* Tabs */}
         <Tabs defaultValue="region" className="w-full">
           <TabsList className="w-full grid grid-cols-2 rounded-none h-12">
-            <TabsTrigger value="region" className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 w-2 h-2 bg-destructive rounded-full" />
+            <TabsTrigger value="region">
               시/도 선택
             </TabsTrigger>
             <TabsTrigger value="radius">반경조건 설정</TabsTrigger>
@@ -87,10 +86,8 @@ const Map = () => {
                 {hospitalData.map((hospital, index) => (
                   <div key={index} className="space-y-2 pb-3 border-b last:border-b-0">
                     {/* Hospital Name Row */}
-                    <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-destructive" />
+                    <div className="flex items-center">
                       <span className="text-sm font-medium">{hospital.name}</span>
-                      {hospital.isHot && <Flame className="w-4 h-4 text-destructive" />}
                     </div>
 
                     {/* Hospital Info Row */}
