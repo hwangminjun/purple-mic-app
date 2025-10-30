@@ -3,9 +3,9 @@ import { Card, CardContent } from "@/components/ui/card";
 const VoiceResult = () => {
   const results = [
     {
-      name: "가톨릭대학교 서울성모병원",
+      name: "부안성모병원",
       phone: "1588-1511",
-      recommendation: "추천 판단 근거: 신장질환, 뇌혈관질환"
+      recommendation: "추천 판단 근거: 성모병원은 ETA가 34분으로 비교적 빠르며, 수용 이력이 높아 환자의 신속한 이송이 가능합니다. 병상 여유도 11.4로 충분하여, 대퇴부 통증을 호소하는 80대 여성 환자에게 적합한 선택입니다. (ETA 34분, 수용 5, 병상 11.4)"
     },
     {
       name: "강남세브란스병원",
