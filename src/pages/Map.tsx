@@ -74,7 +74,7 @@ const Map = () => {
 
               {/* Table Header */}
               <div className="grid grid-cols-5 gap-2 text-xs text-muted-foreground pb-2 border-b">
-                <div>기관 명</div>
+                <div>기관명</div>
                 <div className="text-center">중급실입원</div>
                 <div className="text-center">중급실소아</div>
                 <div className="text-center">분만실</div>
@@ -92,9 +92,7 @@ const Map = () => {
 
                     {/* Hospital Info Row */}
                     <div className="grid grid-cols-5 gap-2 items-center">
-                      <div className="flex items-center gap-1 text-xs">
-                        <MapPin className="w-3 h-3 text-destructive" />
-                        <span>{hospital.location}</span>
+                      <div className="text-xs">
                       </div>
 
                       <div className="flex flex-col items-center gap-1">
